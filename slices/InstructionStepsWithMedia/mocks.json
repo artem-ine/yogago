@@ -1,0 +1,72 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "steps_with_media",
+		"primary": {
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading1",
+						"content": {
+							"text": "Locate"
+						}
+					}
+				]
+			},
+			"steps": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"step_text",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "pig",
+									"type": "Text"
+								}
+							],
+							[
+								"step_number",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "55",
+									"type": "Number"
+								}
+							],
+							[
+								"step_image",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+										"width": 3882,
+										"height": 2584
+									},
+									"url": "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+									"width": 3882,
+									"height": 2584,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"alt": "vote",
+									"credits": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							]
+						]
+					}
+				]
+			}
+		},
+		"items": []
+	}
+]

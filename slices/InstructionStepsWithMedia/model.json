@@ -1,0 +1,54 @@
+{
+  "type": "SharedSlice",
+  "id": "instruction_steps_with_media",
+  "name": "InstructionStepsWithMedia",
+  "variations": [
+    {
+      "id": "steps_with_media",
+      "name": "Steps with Media",
+      "description": "Instruction steps in a numbered list with a media block alongside.",
+      "version": "initial",
+      "imageUrl": "",
+      "docURL": "...",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "single": "heading1",
+            "label": "Title"
+          }
+        },
+        "steps": {
+          "type": "Group",
+          "config": {
+            "label": "Steps",
+            "fields": {
+              "step_number": {
+                "type": "Number",
+                "config": {
+                  "label": "step number",
+                  "placeholder": ""
+                }
+              },
+              "step_text": {
+                "type": "Text",
+                "config": {
+                  "label": "Step Text"
+                }
+              },
+              "step_image": {
+                "type": "Image",
+                "config": {
+                  "label": "step image",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

@@ -69,7 +69,7 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
-type PageDocumentDataSlicesSlice = HeroSlice;
+type PageDocumentDataSlicesSlice = InstructionStepsWithMediaSlice | HeroSlice;
 
 /**
  * Content for page documents
@@ -242,6 +242,100 @@ type HeroSliceVariation = HeroSliceDefault | HeroSliceEmbedUp;
  */
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
 
+/**
+ * Item in *InstructionStepsWithMedia → Steps with Media → Primary → Steps*
+ */
+export interface InstructionStepsWithMediaSliceStepsWithMediaPrimaryStepsItem {
+  /**
+   * step number field in *InstructionStepsWithMedia → Steps with Media → Primary → Steps*
+   *
+   * - **Field Type**: Number
+   * - **Placeholder**: *None*
+   * - **API ID Path**: instruction_steps_with_media.steps_with_media.primary.steps[].step_number
+   * - **Documentation**: https://prismic.io/docs/fields/number
+   */
+  step_number: prismic.NumberField;
+
+  /**
+   * Step Text field in *InstructionStepsWithMedia → Steps with Media → Primary → Steps*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: instruction_steps_with_media.steps_with_media.primary.steps[].step_text
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  step_text: prismic.KeyTextField;
+
+  /**
+   * step image field in *InstructionStepsWithMedia → Steps with Media → Primary → Steps*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: instruction_steps_with_media.steps_with_media.primary.steps[].step_image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  step_image: prismic.ImageField<never>;
+}
+
+/**
+ * Primary content in *InstructionStepsWithMedia → Steps with Media → Primary*
+ */
+export interface InstructionStepsWithMediaSliceStepsWithMediaPrimary {
+  /**
+   * Title field in *InstructionStepsWithMedia → Steps with Media → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: instruction_steps_with_media.steps_with_media.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Steps field in *InstructionStepsWithMedia → Steps with Media → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: instruction_steps_with_media.steps_with_media.primary.steps[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  steps: prismic.GroupField<
+    Simplify<InstructionStepsWithMediaSliceStepsWithMediaPrimaryStepsItem>
+  >;
+}
+
+/**
+ * Steps with Media variation for InstructionStepsWithMedia Slice
+ *
+ * - **API ID**: `steps_with_media`
+ * - **Description**: Instruction steps in a numbered list with a media block alongside.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type InstructionStepsWithMediaSliceStepsWithMedia =
+  prismic.SharedSliceVariation<
+    "steps_with_media",
+    Simplify<InstructionStepsWithMediaSliceStepsWithMediaPrimary>,
+    never
+  >;
+
+/**
+ * Slice variation for *InstructionStepsWithMedia*
+ */
+type InstructionStepsWithMediaSliceVariation =
+  InstructionStepsWithMediaSliceStepsWithMedia;
+
+/**
+ * InstructionStepsWithMedia Shared Slice
+ *
+ * - **API ID**: `instruction_steps_with_media`
+ * - **Description**: *None*
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type InstructionStepsWithMediaSlice = prismic.SharedSlice<
+  "instruction_steps_with_media",
+  InstructionStepsWithMediaSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -273,6 +367,11 @@ declare module "@prismicio/client" {
       HeroSliceVariation,
       HeroSliceDefault,
       HeroSliceEmbedUp,
+      InstructionStepsWithMediaSlice,
+      InstructionStepsWithMediaSliceStepsWithMediaPrimaryStepsItem,
+      InstructionStepsWithMediaSliceStepsWithMediaPrimary,
+      InstructionStepsWithMediaSliceVariation,
+      InstructionStepsWithMediaSliceStepsWithMedia,
     };
   }
 }

@@ -4,4 +4,7 @@ import dynamic from "next/dynamic";
 
 export const components = {
   hero: dynamic(() => import("./Hero")),
+  instruction_steps_with_media: dynamic(
+    () => import("./InstructionStepsWithMedia"),
+  ),
 };

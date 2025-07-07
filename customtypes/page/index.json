@@ -17,6 +17,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "instruction_steps_with_media": {
+              "type": "SharedSlice"
+            },
             "hero": {
               "type": "SharedSlice"
             }
