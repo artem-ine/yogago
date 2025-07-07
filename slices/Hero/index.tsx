@@ -20,16 +20,6 @@ const Hero: FC<HeroProps> = ({ slice }) => {
           isImageRight ? "md:flex-row-reverse" : "md:flex-row"
         } items-center gap-10`}
       >
-        {/* Left (or Right) Image */}
-        {isFilled.image(slice.primary.image) && (
-          <div className="w-full md:w-1/2 flex justify-center">
-            <PrismicNextImage
-              field={slice.primary.image}
-              className="max-w-full h-auto rounded-xl shadow-lg"
-            />
-          </div>
-        )}
-
         {/* Content */}
         <div className="w-full md:w-1/2 px-4 md:px-6 flex flex-col gap-6">
           {/* Embed on Top for embedUp variation */}
@@ -62,6 +52,16 @@ const Hero: FC<HeroProps> = ({ slice }) => {
             )}
           </div>
         </div>
+
+        {/* Left (or Right) Image */}
+        {isFilled.image(slice.primary.image) && (
+          <div className="w-full md:w-1/2 flex justify-center">
+            <PrismicNextImage
+              field={slice.primary.image}
+              className="max-w-full h-auto rounded-xl shadow-lg"
+            />
+          </div>
+        )}
       </div>
     </section>
   );
