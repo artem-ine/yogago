@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SliceZone } from "@prismicio/react";
-import "@/styles/globals.css";
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
+import "./globals.css";
 /* import { getLocales } from "@/lib/getLocales";
 import { Layout } from "@/components/Layout";
  */
