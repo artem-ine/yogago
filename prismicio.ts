@@ -22,7 +22,7 @@ const routes: Route[] = [
   {
     type: "page",
     uid: "landing-page",
-    path: "/",
+    path: "/:lang",
   },
 ];
 

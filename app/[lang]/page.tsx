@@ -3,10 +3,9 @@ import { notFound } from "next/navigation";
 import { SliceZone } from "@prismicio/react";
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
-import "./globals.css";
-/* import { getLocales } from "@/lib/getLocales";
+import "../globals.css";
+import { getLocales } from "@/lib/getLocales";
 import { Layout } from "@/components/Layout";
- */
 
 type Params = { lang: string };
 
@@ -19,12 +18,12 @@ export default async function Page({ params }: { params: Promise<Params> }) {
     .getByUID("page", "landing-page", { lang })
     .catch(() => notFound());
 
-  // const locales = await getLocales(page, client);
+  const locales = await getLocales(page, client);
 
   return (
-    // <Layout locales={locales} currentLang={lang}>
-    <SliceZone slices={page.data.slices} components={components} />
-    // </Layout>
+    <Layout locales={locales} currentLang={lang}>
+      <SliceZone slices={page.data.slices} components={components} />
+    </Layout>
   );
 }
 
