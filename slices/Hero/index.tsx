@@ -9,17 +9,28 @@ import { PrismicNextImage } from "@prismicio/next";
 
 export type HeroProps = SliceComponentProps<Content.HeroSlice>;
 
+function hasCTABadges(primary: unknown): primary is {
+  cta_buttons: Array<{ button: unknown; button_image: unknown }>;
+} {
+  return (
+    typeof primary === "object" &&
+    primary !== null &&
+    "cta_buttons" in primary &&
+    Array.isArray((primary as { cta_buttons?: unknown }).cta_buttons)
+  );
+}
+
 const Hero: FC<HeroProps> = ({ slice }) => {
   const variation = slice.variation;
 
   // Helper to render badges (cta buttons)
   const renderCTABadges = () => {
-    if (!slice.primary.cta_buttons || slice.primary.cta_buttons.length === 0)
+    if (!hasCTABadges(slice.primary) || slice.primary.cta_buttons.length === 0)
       return null;
     return (
       <div className="flex gap-4 pt-6 flex-wrap items-center">
         {slice.primary.cta_buttons.map((cta, index) =>
-          cta.button && cta.button.url && cta.button_image ? (
+          cta.button && cta.button_image ? (
             <PrismicLink
               key={index}
               field={cta.button}
@@ -29,7 +40,6 @@ const Hero: FC<HeroProps> = ({ slice }) => {
             >
               <PrismicNextImage
                 field={cta.button_image}
-                alt={cta.button_image.alt ?? "Download button"}
                 className="h-12 w-auto object-contain"
               />
             </PrismicLink>

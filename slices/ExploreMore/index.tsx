@@ -3,8 +3,9 @@
 import { FC, useEffect, useRef } from "react";
 import { SliceComponentProps } from "@prismicio/react";
 import { PrismicRichText } from "@prismicio/react";
+import { Content } from "@prismicio/client";
 
-export type ExploreMoreProps = SliceComponentProps<any>;
+export type ExploreMoreProps = SliceComponentProps<Content.ExploreMoreSlice>;
 
 const ExploreMore: FC<ExploreMoreProps> = ({ slice }) => {
   const carouselRef = useRef<HTMLDivElement>(null);
