@@ -1,0 +1,64 @@
+{
+  "type": "SharedSlice",
+  "id": "icon_feature_highlights",
+  "name": "IconFeatureHighlights",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "description": "Displays a heading and a repeatable group of highlighted features, each including an image, shape, and label.",
+      "version": "initial",
+      "imageUrl": "",
+      "docURL": "...",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "single": "heading2",
+            "label": "Title"
+          }
+        },
+        "features": {
+          "type": "Group",
+          "config": {
+            "label": "Features",
+            "fields": {
+              "image": {
+                "type": "Image",
+                "config": {
+                  "label": "Image"
+                }
+              },
+              "shape": {
+                "type": "Select",
+                "config": {
+                  "label": "Decorative Shape",
+                  "options": [
+                    "circle",
+                    "half-circle",
+                    "quarter-circle",
+                    "square",
+                    "custom"
+                  ]
+                }
+              },
+              "shape_color": {
+                "type": "Color",
+                "config": {
+                  "label": "Shape Color"
+                }
+              },
+              "description": {
+                "type": "StructuredText",
+                "config": {
+                  "multi": "paragraph,strong,em",
+                  "label": "Description"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

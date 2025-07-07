@@ -69,7 +69,11 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
-type PageDocumentDataSlicesSlice = InstructionStepsWithMediaSlice | HeroSlice;
+type PageDocumentDataSlicesSlice =
+  | ExploreMoreSlice
+  | IconFeatureHighlightsSlice
+  | InstructionStepsWithMediaSlice
+  | HeroSlice;
 
 /**
  * Content for page documents
@@ -131,6 +135,78 @@ export type PageDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
 
 export type AllDocumentTypes = PageDocument;
+
+/**
+ * Item in *ExploreMore → Default → Primary → carousel*
+ */
+export interface ExploreMoreSliceDefaultPrimaryCarouselItem {
+  /**
+   * text field in *ExploreMore → Default → Primary → carousel*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: explore_more.default.primary.carousel[].text
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  text: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *ExploreMore → Default → Primary*
+ */
+export interface ExploreMoreSliceDefaultPrimary {
+  /**
+   * title field in *ExploreMore → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: explore_more.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * carousel field in *ExploreMore → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: explore_more.default.primary.carousel[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  carousel: prismic.GroupField<
+    Simplify<ExploreMoreSliceDefaultPrimaryCarouselItem>
+  >;
+}
+
+/**
+ * Default variation for ExploreMore Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ExploreMoreSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ExploreMoreSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ExploreMore*
+ */
+type ExploreMoreSliceVariation = ExploreMoreSliceDefault;
+
+/**
+ * ExploreMore Shared Slice
+ *
+ * - **API ID**: `explore_more`
+ * - **Description**: ExploreMore
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ExploreMoreSlice = prismic.SharedSlice<
+  "explore_more",
+  ExploreMoreSliceVariation
+>;
 
 /**
  * Primary content in *Hero → Default → Primary*
@@ -241,6 +317,110 @@ type HeroSliceVariation = HeroSliceDefault | HeroSliceEmbedUp;
  * - **Documentation**: https://prismic.io/docs/slices
  */
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
+
+/**
+ * Item in *IconFeatureHighlights → Default → Primary → Features*
+ */
+export interface IconFeatureHighlightsSliceDefaultPrimaryFeaturesItem {
+  /**
+   * Image field in *IconFeatureHighlights → Default → Primary → Features*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: icon_feature_highlights.default.primary.features[].image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Decorative Shape field in *IconFeatureHighlights → Default → Primary → Features*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: icon_feature_highlights.default.primary.features[].shape
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  shape: prismic.SelectField<
+    "circle" | "half-circle" | "quarter-circle" | "square" | "custom"
+  >;
+
+  /**
+   * Shape Color field in *IconFeatureHighlights → Default → Primary → Features*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: *None*
+   * - **API ID Path**: icon_feature_highlights.default.primary.features[].shape_color
+   * - **Documentation**: https://prismic.io/docs/fields/color
+   */
+  shape_color: prismic.ColorField;
+
+  /**
+   * Description field in *IconFeatureHighlights → Default → Primary → Features*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: icon_feature_highlights.default.primary.features[].description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *IconFeatureHighlights → Default → Primary*
+ */
+export interface IconFeatureHighlightsSliceDefaultPrimary {
+  /**
+   * Title field in *IconFeatureHighlights → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: icon_feature_highlights.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Features field in *IconFeatureHighlights → Default → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: icon_feature_highlights.default.primary.features[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  features: prismic.GroupField<
+    Simplify<IconFeatureHighlightsSliceDefaultPrimaryFeaturesItem>
+  >;
+}
+
+/**
+ * Default variation for IconFeatureHighlights Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Displays a heading and a repeatable group of highlighted features, each including an image, shape, and label.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type IconFeatureHighlightsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<IconFeatureHighlightsSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *IconFeatureHighlights*
+ */
+type IconFeatureHighlightsSliceVariation = IconFeatureHighlightsSliceDefault;
+
+/**
+ * IconFeatureHighlights Shared Slice
+ *
+ * - **API ID**: `icon_feature_highlights`
+ * - **Description**: *None*
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type IconFeatureHighlightsSlice = prismic.SharedSlice<
+  "icon_feature_highlights",
+  IconFeatureHighlightsSliceVariation
+>;
 
 /**
  * Item in *InstructionStepsWithMedia → Steps with Media → Primary → Steps*
@@ -361,12 +541,22 @@ declare module "@prismicio/client" {
       PageDocumentData,
       PageDocumentDataSlicesSlice,
       AllDocumentTypes,
+      ExploreMoreSlice,
+      ExploreMoreSliceDefaultPrimaryCarouselItem,
+      ExploreMoreSliceDefaultPrimary,
+      ExploreMoreSliceVariation,
+      ExploreMoreSliceDefault,
       HeroSlice,
       HeroSliceDefaultPrimary,
       HeroSliceEmbedUpPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
       HeroSliceEmbedUp,
+      IconFeatureHighlightsSlice,
+      IconFeatureHighlightsSliceDefaultPrimaryFeaturesItem,
+      IconFeatureHighlightsSliceDefaultPrimary,
+      IconFeatureHighlightsSliceVariation,
+      IconFeatureHighlightsSliceDefault,
       InstructionStepsWithMediaSlice,
       InstructionStepsWithMediaSliceStepsWithMediaPrimaryStepsItem,
       InstructionStepsWithMediaSliceStepsWithMediaPrimary,

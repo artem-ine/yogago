@@ -3,7 +3,9 @@
 import dynamic from "next/dynamic";
 
 export const components = {
+  explore_more: dynamic(() => import("./ExploreMore")),
   hero: dynamic(() => import("./Hero")),
+  icon_feature_highlights: dynamic(() => import("./IconFeatureHighlights")),
   instruction_steps_with_media: dynamic(
     () => import("./InstructionStepsWithMedia"),
   ),
