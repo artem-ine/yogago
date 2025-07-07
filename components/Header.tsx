@@ -192,7 +192,9 @@ export function Header({ locales, currentLang }: Props) {
                 {locales.map((locale) => (
                   <li key={locale.lang}>
                     <button
-                      onClick={() => (window.location.href = locale.url)}
+                      onClick={() => {
+                        window.location.href = locale.url ?? "/en-us";
+                      }}
                       className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-100 ${
                         currentLang === locale.lang ? "font-semibold" : ""
                       }`}
