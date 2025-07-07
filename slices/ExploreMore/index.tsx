@@ -32,7 +32,7 @@ const ExploreMore: FC<ExploreMoreProps> = ({ slice }) => {
       {/* Title */}
       {slice.primary.title && (
         <div className="mb-10 text-center">
-          <h2 className="text-4xl font-extrabold text-center">
+          <h2 className="text-4xl font-extrabold text-center text-black">
             {slice.primary.title}
           </h2>
           <span className="block w-[64.5px] border-b-4 border-[#fcc419] rounded-[30px] mt-[18px] mx-auto" />
@@ -60,31 +60,47 @@ const ExploreMore: FC<ExploreMoreProps> = ({ slice }) => {
         {/* Carousel track */}
         <div
           ref={carouselRef}
-          className="flex gap-12 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide"
+          className="flex gap-20 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide items-center"
           style={{ scrollPaddingLeft: 24, scrollPaddingRight: 24 }}
         >
-          {slice.primary.carousel.map((item, idx) => (
-            <a
-              key={idx}
-              href="#"
-              className="snap-start flex-shrink-0 w-72 h-72 bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition flex flex-col justify-center cursor-pointer mb-8"
-            >
-              <PrismicRichText
-                field={item.text}
-                components={{
-                  paragraph: ({ children }) => (
-                    <p className="text-gray-900 text-lg leading-relaxed">
-                      {children}
-                    </p>
-                  ),
-                  strong: ({ children }) => (
-                    <strong className="font-semibold">{children}</strong>
-                  ),
-                  em: ({ children }) => <em className="italic">{children}</em>,
+          {slice.primary.carousel.map((item, idx) => {
+            // For every 3 cards: indexes 0,1 = squares; index 2 = rectangle
+            const isRectangle = idx % 3 === 2;
+
+            return (
+              <a
+                key={idx}
+                href="#"
+                className={`snap-start flex-shrink-0 bg-white rounded-2xl shadow-lg p-8 hover:shadow-1xl transition flex flex-col justify-center cursor-pointer mb-8`}
+                style={{
+                  width: isRectangle ? "360px" : "280px",
+                  height: isRectangle ? "400px" : "280px",
+                  // Align all cards vertically center in the flex container
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
-              />
-            </a>
-          ))}
+              >
+                <PrismicRichText
+                  field={item.text}
+                  components={{
+                    paragraph: ({ children }) => (
+                      <p className="text-grayText text-lg leading-relaxed text-center">
+                        {children}
+                      </p>
+                    ),
+                    strong: ({ children }) => (
+                      <strong className="font-semibold">{children}</strong>
+                    ),
+                    em: ({ children }) => (
+                      <em className="italic">{children}</em>
+                    ),
+                  }}
+                />
+              </a>
+            );
+          })}
         </div>
       </div>
     </section>

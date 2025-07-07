@@ -11,6 +11,7 @@ module.exports = {
         primary: "#7B61FF", // Approx YogaGo purple
         accent: "#FCEFF9", // Light pinkish background
         grayLight: "#F7F7F7",
+        grayText: "#424242",
         textDark: "#1A1A1A",
         textLight: "#666",
       },
