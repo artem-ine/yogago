@@ -45,7 +45,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="w-full bg-white text-gray-900 py-12 md:py-20"
+        className="w-full py-12 md:py-20"
       >
         <div className="container mx-auto max-w-3xl text-center px-4 md:px-6 flex flex-col gap-6">
           {isFilled.richText(slice.primary.title) && (
