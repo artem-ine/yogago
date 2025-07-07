@@ -15,7 +15,16 @@ module.exports = {
         textLight: "#666",
       },
       fontFamily: {
-        sans: ["InterVariable", "sans-serif"],
+        "sf-pro": [
+          "SF Pro Display",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "Roboto",
+          "Helvetica",
+          "Arial",
+          "sans-serif",
+        ],
       },
       spacing: {
         section: "5rem",

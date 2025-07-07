@@ -19,7 +19,7 @@ const InstructionStepsWithMedia: FC<InstructionStepsWithMediaProps> = ({
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="w-full bg-white py-20 text-textDark"
+      className="w-full py-20 text-textDark"
     >
       <div className="max-w-6xl mx-auto px-4 md:px-8 flex flex-col gap-12">
         {/* Title */}
