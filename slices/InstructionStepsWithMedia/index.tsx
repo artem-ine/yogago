@@ -28,9 +28,12 @@ const InstructionStepsWithMedia: FC<InstructionStepsWithMediaProps> = ({
             field={slice.primary.title}
             components={{
               heading1: ({ children }) => (
-                <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-left">
-                  {children}
-                </h1>
+                <div className="text-center">
+                  <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
+                    {children}
+                  </h1>
+                  <span className="block w-[64.5px] h-[5px] bg-[#fcc419] rounded-[30px] mt-[18px] mx-auto" />
+                </div>
               ),
             }}
           />
@@ -63,9 +66,9 @@ const InstructionStepsWithMedia: FC<InstructionStepsWithMediaProps> = ({
                       : "border-transparent"
                   }`}
                 >
-                  <h5 className="mb-1 text-sm font-semibold tracking-wide text-black">
+                  <div className="mb-1 text-sm font-semibold tracking-wide text-black">
                     Step {step.step_number}
-                  </h5>
+                  </div>
                   <p className="text-base md:text-lg text-black leading-relaxed">
                     {step.step_text}
                   </p>
