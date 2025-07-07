@@ -45,7 +45,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="w-full py-12 md:py-20"
+        className="w-full bg-white text-gray-900 py-12 md:py-20"
       >
         <div className="container mx-auto max-w-3xl text-center px-4 md:px-6 flex flex-col gap-6">
           {isFilled.richText(slice.primary.title) && (
@@ -111,17 +111,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       className="w-full bg-white text-gray-900 py-12 md:py-20"
     >
       <div className="container mx-auto max-w-6xl flex flex-col md:flex-row items-center gap-10 px-4 md:px-6">
-        {/* Image on left for imageRightWithCta and default */}
-        {isFilled.image(slice.primary.image) && (
-          <div className="w-full md:w-1/2 flex justify-center">
-            <PrismicNextImage
-              field={slice.primary.image}
-              className="max-w-full h-auto rounded-xl shadow-lg"
-            />
-          </div>
-        )}
-
-        {/* Text + CTA badges on right */}
+        {/* Text + CTA badges on left */}
         <div className="w-full md:w-1/2 flex flex-col gap-6">
           {isFilled.richText(slice.primary.title) && (
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
@@ -133,9 +123,18 @@ const Hero: FC<HeroProps> = ({ slice }) => {
               <PrismicRichText field={slice.primary.description} />
             </div>
           )}
-
           {renderCTABadges()}
         </div>
+
+        {/* Image on right */}
+        {isFilled.image(slice.primary.image) && (
+          <div className="w-full md:w-1/2 flex justify-center">
+            <PrismicNextImage
+              field={slice.primary.image}
+              className="max-w-full h-auto rounded-xl shadow-lg"
+            />
+          </div>
+        )}
       </div>
     </section>
   );
