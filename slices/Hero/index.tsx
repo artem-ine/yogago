@@ -1,189 +1,68 @@
 import { FC } from "react";
 import { Content, isFilled } from "@prismicio/client";
 import { SliceComponentProps, PrismicRichText } from "@prismicio/react";
-import { PrismicNextLink, PrismicNextImage } from "@prismicio/next";
+import { PrismicNextImage } from "@prismicio/next";
 
 export type HeroProps = SliceComponentProps<Content.HeroSlice>;
 
 const Hero: FC<HeroProps> = ({ slice }) => {
+  const isImageRight = slice.variation === "imageRight";
+  const isEmbedUp = slice.variation === "embedUp";
+
   return (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="es-bounded es-fullpage-hero"
+      className="w-full bg-white text-gray-900 py-12 md:py-20"
     >
       <div
-        className={`
-            es-fullpage-hero__content
-            ${
-              slice.variation === "imageRight"
-                ? "es-fullpage-hero__image--right"
-                : "es-fullpage-hero__image--left"
-            }
-        `}
+        className={`container mx-auto flex flex-col-reverse ${
+          isImageRight ? "md:flex-row-reverse" : "md:flex-row"
+        } items-center gap-10`}
       >
-        <div>
-          {isFilled.image(slice.primary.image) && (
+        {/* Left (or Right) Image */}
+        {isFilled.image(slice.primary.image) && (
+          <div className="w-full md:w-1/2 flex justify-center">
             <PrismicNextImage
               field={slice.primary.image}
-              className="es-fullpage-hero__image"
+              className="max-w-full h-auto rounded-xl shadow-lg"
+            />
+          </div>
+        )}
+
+        {/* Content */}
+        <div className="w-full md:w-1/2 px-4 md:px-6 flex flex-col gap-6">
+          {/* Embed on Top for embedUp variation */}
+          {isEmbedUp && isFilled.embed(slice.primary.embed) && (
+            <div
+              className="aspect-video w-full rounded-lg overflow-hidden shadow"
+              dangerouslySetInnerHTML={{
+                __html: slice.primary.embed.html || "",
+              }}
             />
           )}
-        </div>
 
-        <div className="es-fullpage-hero__content-right">
-          <div className="es-fullpage-hero__content__intro">
+          <div className="flex flex-col gap-4">
             {isFilled.keyText(slice.primary.eyebrowHeadline) && (
-              <p className="es-fullpage-hero__content__intro__eyebrow">
+              <p className="text-green-500 text-lg font-medium uppercase tracking-wide">
                 {slice.primary.eyebrowHeadline}
               </p>
             )}
+
             {isFilled.richText(slice.primary.title) && (
-              <div className="es-fullpage-hero__content__intro__headline">
+              <div className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
                 <PrismicRichText field={slice.primary.title} />
               </div>
             )}
+
             {isFilled.richText(slice.primary.description) && (
-              <div className="es-fullpage-hero__content__intro__description">
+              <div className="text-lg md:text-xl text-gray-700 leading-relaxed">
                 <PrismicRichText field={slice.primary.description} />
               </div>
             )}
-            <PrismicNextLink
-              className="es-call-to-action__link"
-              field={slice.primary.callToActionLink}
-            />
           </div>
         </div>
       </div>
-      <style>
-        {`
-          .es-bounded {
-              margin: 0px;
-              min-width: 0px;
-              position: relative;
-          }
-
-          .es-fullpage-hero {
-              font-family: system-ui, sans-serif;
-              background-color: #fff;
-              color: #333;
-          }
-
-          .es-fullpage-hero__image {
-              max-width: 100%;
-              height: auto;
-              align-self: center;
-          }
-
-          .es-fullpage-hero__image--left > div:first-child {
-              order: 1;
-          }
-
-          .es-fullpage-hero__image--left > div:nth-child(2) {
-              order: 2;
-          }
-
-          .es-fullpage-hero__image--right > div:first-child {
-              order: 2;
-          }
-
-          .es-fullpage-hero__image--right > div:nth-child(2) {
-              order: 1;
-          }
-
-          .es-fullpage-hero__content {
-              display: flex;
-              flex-direction: column;
-              gap: 2rem;
-          }
-
-          .es-fullpage-hero__content-right {
-              display: flex;
-              flex-direction: column;
-              justify-content: space-around;
-              padding: 1.5rem;
-          }
-
-          @media (min-width: 1080px) {
-              .es-fullpage-hero__content {
-                  flex-direction: row;
-              }
-
-              .es-fullpage-hero__content > div {
-                  width: 50%;
-              }
-          }
-
-          .es-fullpage-hero__content__intro {
-              display: grid;
-              gap: 1rem;
-          }
-
-          .es-fullpage-hero__content__intro__eyebrow {
-              color: #47C1AF;
-              font-size: 1.15rem;
-              font-weight: 500;
-              margin: 0;
-          }
-
-          .es-fullpage-hero__content__intro__headline {
-              font-size: 1.625rem;
-              font-weight: 700;
-          }
-
-          .es-fullpage-hero__content__intro__headline * {
-              margin: 0;
-          }
-
-          @media (min-width: 640px) {
-              .es-fullpage-hero__content__intro__headline {
-                  font-size: 2rem;
-              }
-          }
-
-          @media (min-width: 1024px) {
-              .es-fullpage-hero__content__intro__headline {
-                  font-size: 2.5rem;
-              }
-          }
-
-          @media (min-width: 1200px) {
-              .es-fullpage-hero__content__intro__headline {
-                  font-size: 2.75rem;
-              }
-          }
-
-          .es-fullpage-hero__content__intro__description {
-              font-size: 1.15rem;
-              max-width: 38rem;
-          }
-
-          .es-fullpage-hero__content__intro__description > p {
-              margin: 0;
-          }
-
-          @media (min-width: 1200px) {
-              .es-fullpage-hero__content__intro__description {
-                  font-size: 1.4rem;
-              }
-          }
-
-          .es-call-to-action__link {
-              justify-self: flex-start;
-              border-radius: 0.25rem;
-              font-size: 0.875rem;
-              line-height: 1.3;
-              padding: 1rem 2.625rem;
-              transition: background-color 100ms linear;
-              background-color: #16745f;
-              color: #fff;
-          }
-
-          .es-call-to-action__link:hover {
-              background-color: #0d5e4c;
-          }
-      `}
-      </style>
     </section>
   );
 };

@@ -1,0 +1,19 @@
+/* styles/globals.css */
+@import "tailwindcss/preflight";
+@import "@fontsource/inter/variable.css";
+@tailwind utilities;
+@tailwind utilities;
+
+body {
+  @apply font-sans text-textDark bg-white antialiased;
+}
+
+h1,
+h2,
+h3 {
+  @apply font-semibold leading-tight;
+}
+
+p {
+  @apply text-base text-textLight;
+}
