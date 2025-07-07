@@ -1,51 +1,71 @@
-import { FC } from "react";
-import { Content } from "@prismicio/client";
+"use client";
+
+import { FC, useEffect, useRef } from "react";
 import { SliceComponentProps } from "@prismicio/react";
+import { PrismicRichText } from "@prismicio/react";
 
-/**
- * Props for `ExploreMore`.
- */
-export type ExploreMoreProps = SliceComponentProps<Content.ExploreMoreSlice>;
+export type ExploreMoreProps = SliceComponentProps<any>;
 
-/**
- * Component for "ExploreMore" Slices.
- */
 const ExploreMore: FC<ExploreMoreProps> = ({ slice }) => {
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll carousel every 3 seconds
+  useEffect(() => {
+    const scrollInterval = setInterval(() => {
+      if (!carouselRef.current) return;
+      const scrollWidth = carouselRef.current.scrollWidth;
+      const clientWidth = carouselRef.current.clientWidth;
+      if (carouselRef.current.scrollLeft + clientWidth >= scrollWidth) {
+        // Scroll back to start
+        carouselRef.current.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        // Scroll right by one card width (including gap)
+        const cardWidth = 280 + 24; // card width + gap (adjust if changed below)
+        carouselRef.current.scrollBy({ left: cardWidth, behavior: "smooth" });
+      }
+    }, 3000);
+
+    return () => clearInterval(scrollInterval);
+  }, []);
+
   return (
-    <section
-      data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
-    >
-      Placeholder component for explore_more (variation: {slice.variation})
-      slices.
-      <br />
-      <strong>You can edit this slice directly in your code editor.</strong>
-      {/**
-       * 💡 Use Prismic MCP with your code editor
-       *
-       * Get AI-powered help to build your slice components — based on your actual model.
-       *
-       * ▶️ Setup:
-       * 1. Add a new MCP Server in your code editor:
-       *
-       * {
-       *   "mcpServers": {
-       *     "Prismic MCP": {
-       *       "command": "npx",
-       *       "args": ["-y", "@prismicio/mcp-server@latest"]
-       *     }
-       *   }
-       * }
-       *
-       * 2. Select a model optimized for coding (e.g. Claude 3.7 Sonnet or similar)
-       *
-       * ✅ Then open your slice file and ask your code editor:
-       *    "Code this slice"
-       *
-       * Your code editor reads your slice model and helps you code faster ⚡
-       * 🎙️ Give your feedback: https://community.prismic.io/t/help-us-shape-the-future-of-slice-creation/19505
-       * 📚 Documentation: https://prismic.io/docs/ai#code-with-prismics-mcp-server
-       */}
+    <section className="max-w-7xl mx-auto py-16 px-4 md:px-8">
+      {/* Title */}
+      {slice.primary.title && (
+        <h2 className="text-4xl font-extrabold mb-10 text-center md:text-left">
+          {slice.primary.title}
+        </h2>
+      )}
+
+      {/* Carousel track */}
+      <div
+        ref={carouselRef}
+        className="flex gap-12 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide"
+        style={{ scrollPaddingLeft: 24, scrollPaddingRight: 24 }}
+      >
+        {slice.primary.carousel.map((item, idx) => (
+          <a
+            key={idx}
+            href="#"
+            className="snap-start flex-shrink-0 w-72 h-72 bg-white rounded-2xl shadow-lg p-8 hover:shadow-2xl transition flex flex-col justify-center cursor-pointer mb-8"
+          >
+            <PrismicRichText
+              field={item.text}
+              components={{
+                paragraph: ({ children }) => (
+                  <p className="text-gray-900 text-lg leading-relaxed">
+                    {children}
+                  </p>
+                ),
+                strong: ({ children }) => (
+                  <strong className="font-semibold">{children}</strong>
+                ),
+                em: ({ children }) => <em className="italic">{children}</em>,
+              }}
+            />
+          </a>
+        ))}
+      </div>
     </section>
   );
 };

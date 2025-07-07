@@ -209,6 +209,31 @@ export type ExploreMoreSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Item in *Hero → ImageRightWithCTA → Primary → cta buttons*
+ */
+export interface HeroSliceImageRightWithCtaPrimaryCtaButtonsItem {
+  /**
+   * button field in *Hero → ImageRightWithCTA → Primary → cta buttons*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.imageRightWithCta.primary.cta_buttons[].button
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  button: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * button image field in *Hero → ImageRightWithCTA → Primary → cta buttons*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.imageRightWithCta.primary.cta_buttons[].button_image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  button_image: prismic.ImageField<never>;
+}
+
+/**
  * Primary content in *Hero → Default → Primary*
  */
 export interface HeroSliceDefaultPrimary {
@@ -305,9 +330,111 @@ export type HeroSliceEmbedUp = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *Hero → ImageRightWithCTA → Primary*
+ */
+export interface HeroSliceImageRightWithCtaPrimary {
+  /**
+   * title field in *Hero → ImageRightWithCTA → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.imageRightWithCta.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * description field in *Hero → ImageRightWithCTA → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.imageRightWithCta.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * image field in *Hero → ImageRightWithCTA → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.imageRightWithCta.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * cta buttons field in *Hero → ImageRightWithCTA → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.imageRightWithCta.primary.cta_buttons[]
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  cta_buttons: prismic.GroupField<
+    Simplify<HeroSliceImageRightWithCtaPrimaryCtaButtonsItem>
+  >;
+}
+
+/**
+ * ImageRightWithCTA variation for Hero Slice
+ *
+ * - **API ID**: `imageRightWithCta`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HeroSliceImageRightWithCta = prismic.SharedSliceVariation<
+  "imageRightWithCta",
+  Simplify<HeroSliceImageRightWithCtaPrimary>,
+  never
+>;
+
+/**
+ * Primary content in *Hero → NoImage → Primary*
+ */
+export interface HeroSliceNoImagePrimary {
+  /**
+   * title field in *Hero → NoImage → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.noImage.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * description field in *Hero → NoImage → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.noImage.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+}
+
+/**
+ * NoImage variation for Hero Slice
+ *
+ * - **API ID**: `noImage`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HeroSliceNoImage = prismic.SharedSliceVariation<
+  "noImage",
+  Simplify<HeroSliceNoImagePrimary>,
+  never
+>;
+
+/**
  * Slice variation for *Hero*
  */
-type HeroSliceVariation = HeroSliceDefault | HeroSliceEmbedUp;
+type HeroSliceVariation =
+  | HeroSliceDefault
+  | HeroSliceEmbedUp
+  | HeroSliceImageRightWithCta
+  | HeroSliceNoImage;
 
 /**
  * Hero Shared Slice
@@ -549,9 +676,14 @@ declare module "@prismicio/client" {
       HeroSlice,
       HeroSliceDefaultPrimary,
       HeroSliceEmbedUpPrimary,
+      HeroSliceImageRightWithCtaPrimaryCtaButtonsItem,
+      HeroSliceImageRightWithCtaPrimary,
+      HeroSliceNoImagePrimary,
       HeroSliceVariation,
       HeroSliceDefault,
       HeroSliceEmbedUp,
+      HeroSliceImageRightWithCta,
+      HeroSliceNoImage,
       IconFeatureHighlightsSlice,
       IconFeatureHighlightsSliceDefaultPrimaryFeaturesItem,
       IconFeatureHighlightsSliceDefaultPrimary,
