@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { PrismicNextLink } from "@prismicio/next";
-import type { Locales } from "@/types";
+import type { Locales } from "./Layout";
 
 type Props = {
   locales: Locales[];
@@ -64,8 +64,6 @@ export function Header({ locales, currentLang }: Props) {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  const currentLocale = locales.find((l) => l.lang === currentLang);
 
   return (
     <header className="w-full fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 shadow-sm">

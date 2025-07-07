@@ -72,37 +72,39 @@ const Hero: FC<HeroProps> = ({ slice }) => {
         data-slice-variation={slice.variation}
         className="w-full bg-white text-gray-900 py-12 md:py-20"
       >
-        <div className="container mx-auto max-w-6xl px-4 md:px-6 flex flex-col gap-6">
+        <div className="container mx-auto max-w-6xl px-4 md:px-6 flex flex-col items-center text-center gap-6">
+          {/* Embed */}
           {isFilled.embed(slice.primary.embed) && (
-            <div
-              className="aspect-video w-full rounded-lg overflow-hidden shadow"
-              dangerouslySetInnerHTML={{
-                __html: slice.primary.embed.html || "",
-              }}
-            />
+            <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow">
+              <div
+                className="absolute top-0 left-0 w-full h-full [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:absolute [&>iframe]:top-0 [&>iframe]:left-0"
+                dangerouslySetInnerHTML={{
+                  __html: slice.primary.embed.html || "",
+                }}
+              />
+            </div>
           )}
+
+          {/* Title */}
           {isFilled.richText(slice.primary.title) && (
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
               <PrismicRichText field={slice.primary.title} />
             </h1>
           )}
+
+          {/* Description */}
           {isFilled.richText(slice.primary.description) && (
             <div className="text-lg md:text-xl text-gray-700 leading-relaxed">
               <PrismicRichText field={slice.primary.description} />
             </div>
           )}
+
+          {/* CTA Badges */}
           {renderCTABadges()}
         </div>
       </section>
     );
   }
-
-  // For default and imageRightWithCta variations with image
-  // Default: image left, text right
-  // imageRightWithCta: image left, text right (per your request)
-  // (Note: Both same layout now, just slight classname difference if you want)
-
-  const isImageRightWithCta = variation === "imageRightWithCta";
 
   return (
     <section
