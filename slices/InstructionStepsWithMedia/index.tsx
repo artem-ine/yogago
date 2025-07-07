@@ -36,16 +36,18 @@ const InstructionStepsWithMedia: FC<InstructionStepsWithMediaProps> = ({
           />
         )}
 
-        {/* Layout: Image + Step list */}
-        <div className="flex flex-col md:flex-row gap-10 items-start">
-          {/* Active Step Image */}
-          <div className="md:w-1/2 w-full flex justify-center md:justify-start">
-            {isFilled.image(activeStep?.step_image) && (
-              <PrismicNextImage
-                field={activeStep.step_image}
-                className="rounded-xl max-w-full h-auto transition-all duration-300 ease-in-out"
-              />
-            )}
+        {/* Layout: Centered Image + Step list */}
+        <div className="flex flex-col md:flex-row gap-10 items-center md:items-center rounded-2xl">
+          {/* Image Block (centered vertically with steps) */}
+          <div className="md:w-1/2 w-full flex justify-center md:justify-end">
+            <div className="w-full max-w-md">
+              {isFilled.image(activeStep?.step_image) && (
+                <PrismicNextImage
+                  field={activeStep.step_image}
+                  className="w-full h-full object-contain rounded-2xl shadow-md"
+                />
+              )}
+            </div>
           </div>
 
           {/* Step List */}
@@ -54,16 +56,16 @@ const InstructionStepsWithMedia: FC<InstructionStepsWithMediaProps> = ({
               {steps.map((step, index) => (
                 <li
                   key={index}
-                  className={`cursor-pointer transition-colors p-6 ${
-                    index === activeIndex
-                      ? "border-2 border-yellow-400 rounded-xl"
-                      : "border-none"
-                  }`}
                   onClick={() => setActiveIndex(index)}
+                  className={`cursor-pointer p-6 border ${
+                    index === activeIndex
+                      ? "bg-white border-[2px] border-[#fcc419] rounded-[22px]"
+                      : "border-transparent"
+                  }`}
                 >
-                  <div className="mb-1 text-sm font-semibold tracking-wide text-black">
+                  <h5 className="mb-1 text-sm font-semibold tracking-wide text-black">
                     Step {step.step_number}
-                  </div>
+                  </h5>
                   <p className="text-base md:text-lg text-black leading-relaxed">
                     {step.step_text}
                   </p>
