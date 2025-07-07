@@ -32,7 +32,7 @@ const InstructionStepsWithMedia: FC<InstructionStepsWithMediaProps> = ({
                   <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
                     {children}
                   </h1>
-                  <span className="block w-[64.5px] h-[5px] bg-[#fcc419] rounded-[30px] mt-[18px] mx-auto" />
+                  <span className="block w-[64.5px] h-[5px] bg-[#fcc419] rounded-[30px] m-18 mx-auto pb-4" />
                 </div>
               ),
             }}
