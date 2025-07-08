@@ -6,6 +6,7 @@ import { components } from "@/slices";
 import "../globals.css";
 import { getLocales } from "@/lib/getLocales";
 import { Layout } from "@/components/Layout";
+import BackgroundLayer from "@/components/BackgroundLayer";
 
 type Params = { lang: string };
 
@@ -22,6 +23,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
 
   return (
     <Layout locales={locales} currentLang={lang}>
+      <BackgroundLayer />
       <SliceZone slices={page.data.slices} components={components} />
     </Layout>
   );

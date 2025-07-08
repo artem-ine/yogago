@@ -122,9 +122,9 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       data-slice-variation={slice.variation}
       className="w-full text-gray-900"
     >
-      <div className="container mx-auto max-w-6xl flex flex-col md:flex-row items-center gap-10 px-4 mt-32 md:px-6">
+      <div className="flex md:flex-row flex-col items-center md:items-end justify-between z-1 pt-40 md:pt-60 relative px-4 xl:px-20">
         {/* Text + CTA badges on left */}
-        <div className="w-full md:w-1/2 flex flex-col gap-6">
+        <div className="flex flex-col items-start justify-center self-stretch flex-1 md:max-w-1/2 z-2 pb-12 md:pb-30">
           {isFilled.richText(slice.primary.title) && (
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
               <PrismicRichText field={slice.primary.title} />
@@ -143,7 +143,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
           <div className="w-full md:w-1/2 flex justify-center">
             <PrismicNextImage
               field={slice.primary.image}
-              className="max-w-full h-auto rounded-xl shadow-lg"
+              className="flex-1 md:max-w-1/2 rounded-xl"
             />
           </div>
         )}
