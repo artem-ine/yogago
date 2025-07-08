@@ -62,7 +62,7 @@ export function Footer() {
         </div>
 
         {/* Right side: columns */}
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-x-10 gap-y-6 text-gray-400 text-sm">
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-x-10 gap-y-6 text-white text-sm">
           {/* Product */}
           <div>
             <h3 className="text-white font-semibold mb-2">Product</h3>
@@ -130,7 +130,7 @@ export function Footer() {
       </div>
 
       {/* Footer copyright */}
-      <div className="mt-10 text-center text-gray-400 text-xs font-bold">
+      <div className="mt-10 text-center text-white text-xs font-bold">
         © 2025 Welltech Yoga-Go
       </div>
     </footer>
