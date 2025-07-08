@@ -83,7 +83,7 @@ export function Header({ locales, currentLang }: Props) {
 
   return (
     <header
-      className={`w-full fixed top-0 left-0 right-0 z-50 p-8 transition-all duration-300 ${
+      className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? "bg-[#f7f7f9]/90 backdrop-blur-lg border-b border-[#f0eadf]"
           : "bg-transparent"
@@ -145,7 +145,7 @@ export function Header({ locales, currentLang }: Props) {
             Product Tour
           </a>
           <div className="relative group">
-            <button className="flex items-center tracking-wider gap-3 hover:text-primary transition uppercase hover:text-primary hover:bg-[#e4e4e7] px-4 py-2 rounded-xl tracking-wider transition uppercase">
+            <button className="flex items-center gap-3 hover:text-primary hover:text-primary hover:bg-[#e4e4e7] px-4 py-2 rounded-xl tracking-wider transition uppercase">
               Features
               <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
                 <path
