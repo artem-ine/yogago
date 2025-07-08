@@ -138,11 +138,11 @@ export function Header({ locales, currentLang }: Props) {
 
         {/* NAV LINKS */}
         <nav className="hidden lg:flex gap-6 text-sm font-medium text-gray-900">
-          <a href="#" className="hover:text-primary transition">
+          <a href="#" className="hover:text-primary transition uppercase">
             Product Tour
           </a>
           <div className="relative group">
-            <button className="flex items-center gap-1 hover:text-primary transition">
+            <button className="flex items-center gap-1 hover:text-primary transition uppercase">
               Features
               <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
                 <path
@@ -155,10 +155,10 @@ export function Header({ locales, currentLang }: Props) {
             </button>
             {/* Dropdown placeholder */}
           </div>
-          <a href="#" className="hover:text-primary transition">
+          <a href="#" className="hover:text-primary transition uppercase">
             Help Center
           </a>
-          <a href="#" className="hover:text-primary transition">
+          <a href="#" className="hover:text-primary transition uppercase">
             Wellness Hub
           </a>
         </nav>
