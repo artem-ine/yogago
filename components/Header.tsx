@@ -38,16 +38,21 @@ const UKFlag = (
 
 const FRFlag = (
   <svg
+    width="40"
+    height="40"
+    viewBox="0 0 40 40"
     xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="16"
-    viewBox="0 0 3 2"
-    role="img"
-    aria-label="France Flag"
   >
-    <rect width="1" height="2" fill="#0055A4" />
-    <rect x="1" width="1" height="2" fill="#fff" />
-    <rect x="2" width="1" height="2" fill="#EF4135" />
+    <defs>
+      <clipPath id="fr-rounded-flag">
+        <rect x="4" y="10" width="32" height="20" rx="2" ry="2" />
+      </clipPath>
+    </defs>
+    <g clipPath="url(#fr-rounded-flag)">
+      <rect x="4" y="10" width="10.67" height="20" fill="#0055A4" />
+      <rect x="14.67" y="10" width="10.66" height="20" fill="#FFFFFF" />
+      <rect x="25.33" y="10" width="10.67" height="20" fill="#EF4135" />
+    </g>
   </svg>
 );
 
@@ -65,8 +70,25 @@ export function Header({ locales, currentLang }: Props) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="w-full fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 shadow-sm">
+    <header
+      className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-white/70 backdrop-blur-md border-b shadow-sm"
+          : "bg-transparent"
+      }`}
+    >
       <div className="max-w-[1440px] mx-auto px-6 md:px-10 xl:px-20 py-4 flex items-center justify-between">
         {/* LOGO */}
         <PrismicNextLink href="/" className="flex items-center">
@@ -145,7 +167,7 @@ export function Header({ locales, currentLang }: Props) {
         <div className="hidden lg:flex items-center gap-4">
           <a
             href="#"
-            className="bg-black text-white text-sm font-semibold px-5 py-2 rounded hover:bg-gray-800 transition"
+            className="bg-yellow-400 text-black text-sm font-bold uppercase px-5 py-2 rounded-lg hover:bg-yellow-300 transition"
           >
             Join Us
           </a>
@@ -188,18 +210,24 @@ export function Header({ locales, currentLang }: Props) {
             </button>
 
             {isLangOpen && (
-              <ul className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 shadow-lg rounded-md py-2 z-50">
+              <ul className="absolute right-0 mt-2 w-50 bg-gray-300 border-gray-300 py-2 z-50 border-8 rounded-xl">
                 {locales.map((locale) => (
                   <li key={locale.lang}>
                     <button
                       onClick={() => {
                         window.location.href = locale.url ?? "/en-us";
                       }}
-                      className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-100 ${
+                      className={`w-full text-left px-4 py-2 text-sm flex align-middle items-center gap-2 border-2 border-gray-300 bg-gray-400 rounded-xl ${
                         currentLang === locale.lang ? "font-semibold" : ""
                       }`}
                     >
-                      {locale.lang_name}
+                      {locale.lang === "en-us" ? (
+                        <>{UKFlag} ENGLISH</>
+                      ) : locale.lang === "fr-fr" ? (
+                        <>{FRFlag} FRENCH</>
+                      ) : (
+                        locale.lang
+                      )}
                     </button>
                   </li>
                 ))}
