@@ -21,24 +21,25 @@ const IconFeatureHighlights: FC<IconFeatureHighlightsProps> = ({ slice }) => {
         {/* Title */}
         {isFilled.richText(slice.primary.title) && (
           <div className="mb-12">
-            <div className="text-3xl md:text-5xl font-extrabold leading-tight">
+            <div className="text-4xl md:text-5xl font-bold leading-tight">
               <PrismicRichText field={slice.primary.title} />
             </div>
-            <span className="block w-[64.5px] h-[5px] bg-[#fcc419] rounded-[30px] mt-[18px] mx-auto" />
+            <span className="block w-[64.5px] h-[5px] bg-[#fcc419] rounded-[30px] mt-[18px] mb-12 mx-auto" />
           </div>
         )}
       </div>
 
-      {/* Feature Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
+      {/* Feature Layout with staggered rows */}
+      <div className="flex flex-wrap justify-center gap-x-60 gap-y-20 max-w-6xl mx-auto">
         {features.map((feature, index) => (
           <div
             key={index}
-            className="relative flex flex-col items-center text-center"
+            className={`relative flex flex-col items-center text-center w-36 ${
+              index % 3 === 0 ? "" : "mt-8"
+            }`}
           >
-            {/* Container for image + shape */}
+            {/* Shape Background */}
             <div className="relative w-36 h-36 mb-6">
-              {/* Decorative Shape behind */}
               <div
                 className={`absolute top-0 right-0 w-full h-full ${
                   feature.shape === "circle"
@@ -54,11 +55,10 @@ const IconFeatureHighlights: FC<IconFeatureHighlightsProps> = ({ slice }) => {
                 style={{
                   backgroundColor: feature.shape_color || "#FACC15",
                   zIndex: 10,
-                  transform: "translate(25%, -25%)", // Push shape slightly top-right outside
+                  transform: "translate(25%, -25%)",
                 }}
               ></div>
 
-              {/* Main Image on top */}
               {isFilled.image(feature.image) && (
                 <PrismicNextImage
                   field={feature.image}
@@ -69,7 +69,7 @@ const IconFeatureHighlights: FC<IconFeatureHighlightsProps> = ({ slice }) => {
 
             {/* Description */}
             {isFilled.richText(feature.description) && (
-              <div className="text-sm md:text-base font-medium leading-snug max-w-[140px]">
+              <div className="md:text-base font-bold text-xl leading-snug max-w-[140px]">
                 <PrismicRichText field={feature.description} />
               </div>
             )}
