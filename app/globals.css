@@ -10,13 +10,6 @@
     Arial, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #1a1a1a;
-    --foreground: #fdf8f3;
-  }
-}
-
 /* 💻 Set global body styles */
 body {
   background-color: var(--background);
