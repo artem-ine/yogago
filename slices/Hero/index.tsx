@@ -57,7 +57,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
         data-slice-variation={slice.variation}
         className="w-full text-gray-900"
       >
-        <div className="flex flex-col items-center justify-between z-1 pt-40 md:pt-60 relative max-w-[1440px] mx-auto px-6 md:px-10 xl:px-20">
+        <div className="flex flex-col items-center justify-between z-1 pt-10 md:pt-10 relative max-w-[1440px] mx-auto px-6 md:px-10 xl:px-20">
           {isFilled.richText(slice.primary.title) && (
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
               <PrismicRichText field={slice.primary.title} />
@@ -80,9 +80,9 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       <section
         data-slice-type={slice.slice_type}
         data-slice-variation={slice.variation}
-        className="w-full text-gray-900 py-12 md:py-20"
+        className="w-full text-gray-900"
       >
-        <div className="flex flex-col items-center justify-between z-1 pt-40 md:pt-60 relative max-w-[1440px] mx-auto px-6 md:px-10 xl:px-20">
+        <div className="flex flex-col items-center justify-between z-1 pt-20 relative max-w-[1440px] mx-auto px-6 md:px-10 xl:px-20 gap-6">
           {/* Embed */}
           {isFilled.embed(slice.primary.embed) && (
             <div className="relative w-full aspect-video rounded-lg overflow-hidden shadow">
@@ -122,7 +122,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       data-slice-variation={slice.variation}
       className="w-full text-gray-900"
     >
-      <div className="flex md:flex-row flex-col items-center md:items-end justify-between z-1 pt-40 md:pt-60 relative max-w-[1440px] mx-auto px-6 md:px-10 xl:px-20">
+      <div className="flex md:flex-row flex-col items-center md:items-end justify-between z-1 pt-20 md:pt-60 relative max-w-[1440px] mx-auto px-6 md:px-10 xl:px-20">
         {/* Text + CTA badges on left */}
         <div className="flex flex-col items-start justify-center self-stretch flex-1 md:max-w-1/2 z-2 pb-12 md:pb-30">
           {isFilled.richText(slice.primary.title) && (

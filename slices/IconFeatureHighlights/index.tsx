@@ -15,7 +15,7 @@ const IconFeatureHighlights: FC<IconFeatureHighlightsProps> = ({ slice }) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="w-full py-16 text-black"
+      className="w-full py-10 text-black"
     >
       <div className="max-w-6xl mx-auto px-4 md:px-8 text-center">
         {/* Title */}
