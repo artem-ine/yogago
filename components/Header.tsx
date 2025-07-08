@@ -83,9 +83,9 @@ export function Header({ locales, currentLang }: Props) {
 
   return (
     <header
-      className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`w-full fixed top-0 left-0 right-0 z-50 p-8 transition-all duration-300 ${
         isScrolled
-          ? "bg-white/70 backdrop-blur-md border-b shadow-sm"
+          ? "bg-[#f7f7f9]/90 backdrop-blur-lg border-b border-[#f0eadf]"
           : "bg-transparent"
       }`}
     >
@@ -137,12 +137,15 @@ export function Header({ locales, currentLang }: Props) {
         </PrismicNextLink>
 
         {/* NAV LINKS */}
-        <nav className="hidden lg:flex gap-6 text-sm font-medium text-gray-900">
-          <a href="#" className="hover:text-primary transition uppercase">
+        <nav className="hidden lg:flex gap-6 text-base text-gray-900">
+          <a
+            href="#"
+            className="hover:text-primary hover:bg-[#e4e4e7] px-4 py-2 rounded-xl tracking-wider transition uppercase"
+          >
             Product Tour
           </a>
           <div className="relative group">
-            <button className="flex items-center gap-1 hover:text-primary transition uppercase">
+            <button className="flex items-center tracking-wider gap-3 hover:text-primary transition uppercase hover:text-primary hover:bg-[#e4e4e7] px-4 py-2 rounded-xl tracking-wider transition uppercase">
               Features
               <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
                 <path
@@ -155,19 +158,25 @@ export function Header({ locales, currentLang }: Props) {
             </button>
             {/* Dropdown placeholder */}
           </div>
-          <a href="#" className="hover:text-primary transition uppercase">
+          <a
+            href="#"
+            className="hover:text-primary hover:bg-[#e4e4e7] px-4 py-2 rounded-xl tracking-wider transition uppercase"
+          >
             Help Center
           </a>
-          <a href="#" className="hover:text-primary transition uppercase">
+          <a
+            href="#"
+            className="hover:text-primary hover:bg-[#e4e4e7] px-4 py-2 rounded-xl tracking-wider transition uppercase"
+          >
             Wellness Hub
           </a>
         </nav>
 
         {/* CTA + LANGUAGE */}
-        <div className="hidden lg:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-6">
           <a
             href="#"
-            className="bg-yellow-400 text-black text-sm font-bold uppercase px-5 py-2 rounded-lg hover:bg-yellow-300 transition"
+            className="bg-[#FFD500] hover:bg-[#E7B211] text-black text-sm font-bold uppercase px-6 py-2 rounded-xl transition shadow-md"
           >
             Join Us
           </a>
@@ -176,20 +185,8 @@ export function Header({ locales, currentLang }: Props) {
           <div className="relative" ref={langRef}>
             <button
               onClick={() => setIsLangOpen(!isLangOpen)}
-              className="flex items-center gap-2 text-sm font-medium text-gray-800 hover:text-primary focus:outline-none"
+              className="flex items-center gap-2 text-sm font-medium text-black rounded-xl px-3 py-1 "
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10
-                    10-4.48 10-10S17.52 2 12 2zM4 12c0-1.85.63-3.55
-                    1.69-4.9L9 15.5C6.92 14.9 4 13 4 12zm8 8c-1.85
-                    0-3.55-.63-4.9-1.69L15.5 15C14.9 17.08 13 20
-                    12 20zm0-16c1.85 0 3.55.63 4.9 1.69L8.5 9C9.1
-                    6.92 11 4 12 4zm4.31 1.69L15 8.5 17.08
-                    10C18.37 8.45 20 6.4 20 5c0-1.1-.9-2-2-2-.87 0-1.61.55-1.69 1.31z"
-                  fill="#212121"
-                />
-              </svg>
               <span className="text-xl">
                 {currentLang === "fr-fr" ? FRFlag : UKFlag}
               </span>
@@ -210,14 +207,14 @@ export function Header({ locales, currentLang }: Props) {
             </button>
 
             {isLangOpen && (
-              <ul className="absolute right-0 mt-2 w-50 bg-gray-300 border-gray-300 py-2 z-50 border-8 rounded-xl">
+              <ul className="absolute right-0 mt-2 w-52 bg-[#f0e7c9] z-50 shadow-lg rounded-xl border border-[#e3d6b6]">
                 {locales.map((locale) => (
                   <li key={locale.lang}>
                     <button
                       onClick={() => {
                         window.location.href = locale.url ?? "/en-us";
                       }}
-                      className={`w-full text-left px-4 py-2 text-sm flex align-middle items-center gap-2 border-2 border-gray-300 bg-gray-400 rounded-xl ${
+                      className={`w-full text-left px-4 py-2 text-sm flex items-center gap-2 bg-[#e3d6b6] hover:bg-[#f7f1db] transition ${
                         currentLang === locale.lang ? "font-semibold" : ""
                       }`}
                     >
